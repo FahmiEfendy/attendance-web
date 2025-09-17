@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import { CircularProgress } from "@mui/material";
 import { PersistGate } from "redux-persist/integration/react";
 
+import "./index.css";
 import App from "./App";
 import { persistor, store } from "./store";
 import reportWebVitals from "./reportWebVitals";

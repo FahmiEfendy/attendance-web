@@ -4,6 +4,7 @@ import { setToken } from "../store/authSlice";
 import {
   ApiLoginRequest,
   ApiLoginResponse,
+  ApiRegisterRequest,
   ApiRegisterResponse,
 } from "../types/auth";
 
@@ -26,7 +27,7 @@ export const authApi = api.injectEndpoints({
         }
       },
     }),
-    register: builder.mutation<ApiRegisterResponse, ApiRegisterResponse>({
+    register: builder.mutation<ApiRegisterResponse, ApiRegisterRequest>({
       query: (body) => ({
         url: API.AUTH.REGISTER,
         method: "POST",

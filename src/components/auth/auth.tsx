@@ -1,12 +1,18 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, Container, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 
 import { PAGES } from "../../constants/page";
 import { AuthType } from "../../constants/auth";
+import { CustomSelect } from "../form/CustomSelect";
 import CustomTextField from "../form/CustomTextField";
-import { useLoginMutation } from "../../services/authApi";
+import { useLoginMutation, useRegisterMutation } from "../../services/authApi";
+import {
+  DEPARTMENT_ENUM,
+  POSITION_ENUM,
+  ROLE_ENUM,
+} from "../../constants/option";
 import {
   ApiLoginRequest,
   ApiRegisterRequest,
@@ -30,11 +36,37 @@ const AuthElement = ({ type }: AuthElementProps) => {
         : formRegisterDefaultValue,
   });
 
-  const [login, { isSuccess: isSuccessLogin, data: loginData }] =
-    useLoginMutation();
+  const [
+    login,
+    { isSuccess: isSuccessLogin, isLoading: isLoadingLogin, data: loginData },
+  ] = useLoginMutation();
 
-  const onSubmit = (data: ApiLoginRequest | ApiRegisterRequest) => {
-    login({ username: data.username, password: data.password });
+  const [
+    register,
+    { isSuccess: isSuccessRegister, isLoading: isLoadingRegister },
+  ] = useRegisterMutation();
+
+  const onSubmitLogin = (data: ApiLoginRequest) => {
+    const loginPayload: ApiLoginRequest = {
+      username: data.username,
+      password: data.password,
+    };
+    login(loginPayload);
+  };
+
+  const onSubmitRegister = (data: ApiRegisterRequest) => {
+    const registerPayload: ApiRegisterRequest = {
+      username: data.username,
+      password: data.password,
+      role: data.role,
+      full_name: data.full_name,
+      email: data.email,
+      phone: data.phone,
+      department: data.department,
+      position: data.position,
+    };
+
+    register(registerPayload);
   };
 
   useEffect(() => {
@@ -42,6 +74,12 @@ const AuthElement = ({ type }: AuthElementProps) => {
       navigate(PAGES.HOME);
     }
   }, [isSuccessLogin, loginData, navigate]);
+
+  useEffect(() => {
+    if (isSuccessRegister) {
+      navigate(PAGES.LOGIN);
+    }
+  }, [isSuccessRegister, navigate]);
 
   return (
     <>
@@ -65,7 +103,7 @@ const AuthElement = ({ type }: AuthElementProps) => {
         }}
       />
       <Container
-        maxWidth="md"
+        maxWidth="lg"
         sx={{
           height: "100vh",
           display: "flex",
@@ -75,18 +113,23 @@ const AuthElement = ({ type }: AuthElementProps) => {
       >
         <Paper
           component="form"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit((data) => {
+            if (type === AuthType.LOGIN) {
+              onSubmitLogin(data as ApiLoginRequest);
+            } else {
+              onSubmitRegister(data as ApiRegisterRequest);
+            }
+          })}
           elevation={10}
           sx={{
             backgroundColor: "white",
-            height: "40%",
-            width: "90%",
+            width: type === AuthType.LOGIN ? "60%" : "100%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             borderRadius: ".5rem",
-            padding: "1rem",
+            padding: "2rem 1rem",
             gap: "1.5rem",
             zIndex: "10",
           }}
@@ -94,22 +137,100 @@ const AuthElement = ({ type }: AuthElementProps) => {
           <Typography variant="h4" sx={{ marginBottom: "1rem" }}>
             {`${type} Page`}
           </Typography>
-          <CustomTextField
-            control={control}
-            name="username"
-            label="Username"
-            placeholder="Enter your username..."
-          />
-          <CustomTextField
-            control={control}
-            name="password"
-            label="Password"
-            placeholder="Enter your passowrd..."
-            type="password"
-          />
+
+          {type === AuthType.LOGIN && (
+            <>
+              <CustomTextField
+                control={control}
+                name="username"
+                label="Username"
+                placeholder="Enter your username..."
+              />
+              <CustomTextField
+                control={control}
+                name="password"
+                label="Password"
+                placeholder="Enter your passowrd..."
+                type="password"
+              />
+            </>
+          )}
+
+          {type === AuthType.REGISTER && (
+            <Grid container spacing={2}>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="username"
+                  label="Username"
+                  placeholder="Enter your username..."
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="password"
+                  label="Password"
+                  placeholder="Enter your passowrd..."
+                  type="password"
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="email"
+                  label="Email"
+                  placeholder="Enter your email..."
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="full_name"
+                  label="Full Name"
+                  placeholder="Enter your full name..."
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="phone"
+                  label="Phone"
+                  placeholder="Enter your phone number..."
+                  type="number"
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomSelect
+                  control={control}
+                  name="role"
+                  label="Role"
+                  options={ROLE_ENUM}
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomSelect
+                  control={control}
+                  name="department"
+                  label="Deparment"
+                  options={DEPARTMENT_ENUM}
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomSelect
+                  control={control}
+                  name="position"
+                  label="Position"
+                  options={POSITION_ENUM}
+                />
+              </Grid>
+            </Grid>
+          )}
+
           <Button
             type="submit"
             variant="contained"
+            loading={isLoadingLogin || isLoadingRegister}
             sx={{ padding: ".5rem 3rem", marginTop: "1rem" }}
           >
             {type}
