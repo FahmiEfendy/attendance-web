@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { PAGES } from "./constants/page";
+import HomePage from "./pages/home/home";
+import LoginPage from "./pages/login/login";
+import RegisterPage from "./pages/register/register";
+import AuthorizationWrapper from "./components/auth/authorizationWrapper";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={PAGES.LOGIN} element={<LoginPage />} />
+        <Route path={PAGES.REGISTER} element={<RegisterPage />} />
+        <Route
+          path={PAGES.HOME}
+          element={
+            <AuthorizationWrapper>
+              <HomePage />
+            </AuthorizationWrapper>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
