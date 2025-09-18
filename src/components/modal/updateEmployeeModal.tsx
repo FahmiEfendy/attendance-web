@@ -5,6 +5,7 @@ import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
 import { CustomSelect } from "../form/CustomSelect";
 import CustomLoading from "../loading/customLoading";
 import CustomTextField from "../form/CustomTextField";
+import Notification from "../notification/notification";
 import {
   useGetEmployeeDetailQuery,
   useUpdateEmployeeMutation,
@@ -31,8 +32,11 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
   const [
     updateEmployee,
     {
+      data: updateEmployeeData,
       isLoading: isLoadingUpdateEmployee,
       isSuccess: isSuccessUpdateEmployee,
+      isError: isErrorUpdateEmployee,
+      error: errorUpdateEmployee,
       reset: resetUpdateEmployee,
     },
   ] = useUpdateEmployeeMutation();
@@ -65,120 +69,132 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
   useEffect(() => {
     if (isSuccessUpdateEmployee) {
       onClose();
-      resetUpdateEmployee();
     }
   }, [isSuccessUpdateEmployee, onClose, resetUpdateEmployee]);
 
   return (
-    <Modal open={!!employeeId} onClose={onClose}>
-      <Paper
-        component="form"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "50rem",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          padding: "1.5rem",
-          borderRadius: ".5rem",
-          gap: "1.5rem",
-        }}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <Typography variant="h5" sx={{ textAlign: "center" }}>
-          Edit Profile
-        </Typography>
-        {isLoadingEmployeeDetail ? (
-          <CustomLoading />
-        ) : (
-          <Grid container spacing={2}>
-            <Grid size={6}>
-              <CustomTextField
-                control={control}
-                name="username"
-                label="Username"
-                placeholder="Enter username..."
-                disabled
-              />
+    <>
+      <Modal open={!!employeeId} onClose={onClose}>
+        <Paper
+          component="form"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "50rem",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            padding: "1.5rem",
+            borderRadius: ".5rem",
+            gap: "1.5rem",
+          }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Typography variant="h5" sx={{ textAlign: "center" }}>
+            Edit Profile
+          </Typography>
+          {isLoadingEmployeeDetail ? (
+            <CustomLoading />
+          ) : (
+            <Grid container spacing={2}>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="username"
+                  label="Username"
+                  placeholder="Enter username..."
+                  disabled
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="password"
+                  label="Password"
+                  placeholder="Enter passowrd..."
+                  type="password"
+                  disabled
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="email"
+                  label="Email"
+                  placeholder="Enter email..."
+                  disabled
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="full_name"
+                  label="Full Name"
+                  placeholder="Enter full name..."
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomTextField
+                  control={control}
+                  name="phone"
+                  label="Phone"
+                  placeholder="Enter phone number..."
+                  type="number"
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomSelect
+                  control={control}
+                  name="role"
+                  label="Role"
+                  options={ROLE_ENUM}
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomSelect
+                  control={control}
+                  name="department"
+                  label="Deparment"
+                  options={DEPARTMENT_ENUM}
+                />
+              </Grid>
+              <Grid size={6}>
+                <CustomSelect
+                  control={control}
+                  name="position"
+                  label="Position"
+                  options={POSITION_ENUM}
+                />
+              </Grid>
             </Grid>
-            <Grid size={6}>
-              <CustomTextField
-                control={control}
-                name="password"
-                label="Password"
-                placeholder="Enter passowrd..."
-                type="password"
-                disabled
-              />
-            </Grid>
-            <Grid size={6}>
-              <CustomTextField
-                control={control}
-                name="email"
-                label="Email"
-                placeholder="Enter email..."
-                disabled
-              />
-            </Grid>
-            <Grid size={6}>
-              <CustomTextField
-                control={control}
-                name="full_name"
-                label="Full Name"
-                placeholder="Enter full name..."
-              />
-            </Grid>
-            <Grid size={6}>
-              <CustomTextField
-                control={control}
-                name="phone"
-                label="Phone"
-                placeholder="Enter phone number..."
-                type="number"
-              />
-            </Grid>
-            <Grid size={6}>
-              <CustomSelect
-                control={control}
-                name="role"
-                label="Role"
-                options={ROLE_ENUM}
-              />
-            </Grid>
-            <Grid size={6}>
-              <CustomSelect
-                control={control}
-                name="department"
-                label="Deparment"
-                options={DEPARTMENT_ENUM}
-              />
-            </Grid>
-            <Grid size={6}>
-              <CustomSelect
-                control={control}
-                name="position"
-                label="Position"
-                options={POSITION_ENUM}
-              />
-            </Grid>
-          </Grid>
-        )}
-        <Box sx={{ display: "flex", marginLeft: "auto", gap: 2 }}>
-          <Button variant="outlined" color="error" onClick={onClose}>
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            loading={isLoadingUpdateEmployee}
-          >
-            Update Profile
-          </Button>
-        </Box>
-      </Paper>
-    </Modal>
+          )}
+          <Box sx={{ display: "flex", marginLeft: "auto", gap: 2 }}>
+            <Button variant="outlined" color="error" onClick={onClose}>
+              Back
+            </Button>
+            <Button
+              variant="contained"
+              type="submit"
+              loading={isLoadingUpdateEmployee}
+            >
+              Update Profile
+            </Button>
+          </Box>
+        </Paper>
+      </Modal>
+
+      <Notification
+        isOpen={isSuccessUpdateEmployee || isErrorUpdateEmployee}
+        severity={isSuccessUpdateEmployee ? "success" : "error"}
+        message={
+          isSuccessUpdateEmployee
+            ? updateEmployeeData?.message
+            : (errorUpdateEmployee as any)?.data?.message
+        }
+        reset={resetUpdateEmployee}
+      />
+    </>
   );
 };
 

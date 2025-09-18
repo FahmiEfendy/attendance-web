@@ -6,6 +6,7 @@ type DeleteEmployeeModalProps = {
   onClose: () => void;
   deleteEmployee: any;
   isSuccess: boolean;
+  isLoading: boolean;
 };
 
 const DeleteEmployeeModal = ({
@@ -13,6 +14,7 @@ const DeleteEmployeeModal = ({
   onClose,
   deleteEmployee,
   isSuccess,
+  isLoading,
 }: DeleteEmployeeModalProps) => {
   const deleteEmployeeHandler = () => {
     deleteEmployee({ id: employeeDeleteId });
@@ -52,6 +54,7 @@ const DeleteEmployeeModal = ({
               variant="contained"
               color="error"
               onClick={deleteEmployeeHandler}
+              loading={isLoading}
             >
               Delete Employee
             </Button>

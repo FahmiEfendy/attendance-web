@@ -63,12 +63,12 @@ const ListAttendance = ({
                 </TableCell>
                 {role === ROLE_ENUM.HR && (
                   <>
-                    <TableCell>{row?.user.full_name}</TableCell>
+                    <TableCell>{row?.user?.full_name}</TableCell>
                     <TableCell>
-                      {DEPARTMENT_ENUM_LABEL[row?.user.department]}
+                      {DEPARTMENT_ENUM_LABEL[row?.user?.department]}
                     </TableCell>
                     <TableCell>
-                      {POSITION_ENUM_LABEL[row?.user.position]}
+                      {POSITION_ENUM_LABEL[row?.user?.position]}
                     </TableCell>
                   </>
                 )}

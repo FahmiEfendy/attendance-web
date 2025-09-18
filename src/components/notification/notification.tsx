@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Alert, AlertColor, Snackbar } from "@mui/material";
+import { Alert, AlertColor, Snackbar, SxProps } from "@mui/material";
 
 type NotificationProps = {
   isOpen: boolean;
   message: string;
   severity?: AlertColor;
   reset?: any;
+  sxProps?: SxProps;
 };
 
 const Notification = ({
@@ -13,6 +14,7 @@ const Notification = ({
   message,
   severity = "success",
   reset,
+  sxProps,
 }: NotificationProps) => {
   const [open, setOpen] = useState<boolean>(isOpen);
 
@@ -31,7 +33,7 @@ const Notification = ({
       autoHideDuration={3000}
       onClose={closeHandler}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      sx={{ margin: "1rem 2rem" }}
+      sx={{ margin: "1rem 2rem", ...sxProps }}
     >
       <Alert onClose={closeHandler} severity={severity} sx={{ width: "100%" }}>
         {message}

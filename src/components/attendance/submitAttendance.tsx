@@ -44,6 +44,9 @@ const SubmitAttendance = ({ role }: SubmitAttendanceProps) => {
       data: submitAttendanceData,
       isLoading: isLoadingSubmitAttendance,
       isSuccess: isSuccessSubmitAttendance,
+      isError: isErrorSubmitAttendance,
+      error: errorSubmitAttendance,
+      reset: resetSubmitAttendance,
     },
   ] = useSubmitAttendanceMutation();
 
@@ -139,9 +142,14 @@ const SubmitAttendance = ({ role }: SubmitAttendanceProps) => {
       </Box>
 
       <Notification
-        isOpen={isSuccessSubmitAttendance}
-        severity={"success"}
-        message={submitAttendanceData?.message || ""}
+        isOpen={isSuccessSubmitAttendance || isErrorSubmitAttendance}
+        severity={isSuccessSubmitAttendance ? "success" : "error"}
+        message={
+          isSuccessSubmitAttendance
+            ? submitAttendanceData?.message
+            : (errorSubmitAttendance as any)?.data?.message
+        }
+        reset={resetSubmitAttendance}
       />
 
       {userData && (

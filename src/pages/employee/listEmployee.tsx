@@ -46,7 +46,10 @@ const ListEmployee = () => {
     deleteEmployee,
     {
       data: deleteEmployeeData,
+      isLoading: isLoadingDeleteEmployee,
       isSuccess: isSuccessDeleteEmployee,
+      isError: isErrorDeleteEmployee,
+      error: errorDeleteEmployee,
       reset: resetDeleteEmployee,
     },
   ] = useDeleteEmployeeMutation();
@@ -130,12 +133,18 @@ const ListEmployee = () => {
         employeeDeleteId={employeeDeleteId}
         onClose={closeDeleteEmployeeModalHandler}
         deleteEmployee={deleteEmployee}
+        isLoading={isLoadingDeleteEmployee}
         isSuccess={isSuccessDeleteEmployee}
       />
 
       <Notification
-        isOpen={isSuccessDeleteEmployee}
-        message={deleteEmployeeData?.message}
+        isOpen={isSuccessDeleteEmployee || isErrorDeleteEmployee}
+        severity={isSuccessDeleteEmployee ? "success" : "error"}
+        message={
+          isSuccessDeleteEmployee
+            ? deleteEmployeeData?.message
+            : (errorDeleteEmployee as any)?.data?.message
+        }
         reset={resetDeleteEmployee}
       />
     </>

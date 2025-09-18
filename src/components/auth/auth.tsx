@@ -7,6 +7,7 @@ import { PAGES } from "../../constants/page";
 import { AuthType } from "../../constants/auth";
 import { CustomSelect } from "../form/CustomSelect";
 import CustomTextField from "../form/CustomTextField";
+import Notification from "../notification/notification";
 import { useLoginMutation, useRegisterMutation } from "../../services/authApi";
 import {
   DEPARTMENT_ENUM,
@@ -38,12 +39,26 @@ const AuthElement = ({ type }: AuthElementProps) => {
 
   const [
     login,
-    { isSuccess: isSuccessLogin, isLoading: isLoadingLogin, data: loginData },
+    {
+      data: loginData,
+      isLoading: isLoadingLogin,
+      isSuccess: isSuccessLogin,
+      isError: isErrorLogin,
+      error: errorLogin,
+      reset: resetLogin,
+    },
   ] = useLoginMutation();
 
   const [
     register,
-    { isSuccess: isSuccessRegister, isLoading: isLoadingRegister },
+    {
+      data: registerData,
+      isLoading: isLoadingRegister,
+      isSuccess: isSuccessRegister,
+      isError: isErrorRegister,
+      error: errorRegister,
+      reset: resetRegister,
+    },
   ] = useRegisterMutation();
 
   const onSubmitLogin = (data: ApiLoginRequest) => {
@@ -247,6 +262,30 @@ const AuthElement = ({ type }: AuthElementProps) => {
           )}
         </Paper>
       </Container>
+
+      <Notification
+        isOpen={isSuccessLogin || isErrorLogin}
+        severity={isSuccessLogin ? "success" : "error"}
+        message={
+          isSuccessLogin
+            ? loginData?.message
+            : (errorLogin as any)?.data?.message
+        }
+        reset={resetLogin}
+        sxProps={{ zIndex: "20" }}
+      />
+
+      <Notification
+        isOpen={isSuccessRegister || isErrorRegister}
+        severity={isSuccessRegister ? "success" : "error"}
+        message={
+          isSuccessRegister
+            ? registerData?.message
+            : (errorRegister as any)?.data?.message
+        }
+        reset={resetRegister}
+        sxProps={{ zIndex: "20" }}
+      />
     </>
   );
 };
