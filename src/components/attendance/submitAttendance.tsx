@@ -6,6 +6,7 @@ import { Box, Button, Typography } from "@mui/material";
 
 import { RootState } from "../../store";
 import { DecodedToken } from "../../types/auth";
+import { ROLE_ENUM } from "../../constants/role";
 import CustomLoading from "../loading/customLoading";
 import Notification from "../notification/notification";
 import ModalSubmitAttendance from "./modalSubmitAttendance";
@@ -14,7 +15,11 @@ import {
   useSubmitAttendanceMutation,
 } from "../../services/attendanceApi";
 
-const SubmitAttendance = () => {
+type SubmitAttendanceProps = {
+  role: string;
+};
+
+const SubmitAttendance = ({ role }: SubmitAttendanceProps) => {
   const today = dayjs();
 
   const token = useSelector((state: RootState) => state.auth.token);
@@ -24,9 +29,14 @@ const SubmitAttendance = () => {
     useState<boolean>(false);
 
   const { data: myAttendanceToday, isLoading: isLoadingMyAttendanceToday } =
-    useGetMyAttendanceTodayQuery({
-      date: today.format("YYYY-MM-DD"),
-    });
+    useGetMyAttendanceTodayQuery(
+      {
+        date: today.format("YYYY-MM-DD"),
+      },
+      {
+        skip: userData?.role !== ROLE_ENUM.EMPLOYEE, // Prevent fetch if userData not HR
+      }
+    );
 
   const [
     submitAttendance,

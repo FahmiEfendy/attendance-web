@@ -15,6 +15,6 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["myAttendance", "myAttendanceToday"], // Tag for invalidate
+  tagTypes: ["attendance", "myAttendance", "myAttendanceToday"], // Tag for invalidate
   endpoints: () => ({}), // Inject on another files
 });

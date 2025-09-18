@@ -1,6 +1,7 @@
-import * as React from "react";
-import { useDispatch } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import LogoutIcon from "@mui/icons-material/Logout";
 import {
@@ -14,13 +15,20 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { MENU } from "../../constants/menu";
+import { RootState } from "../../store";
+import { DecodedToken } from "../../types/auth";
+import { ROLE_ENUM } from "../../constants/role";
 import { clearToken } from "../../store/authSlice";
 import Topbar from "../../components/topbar/topbar";
+import { HR_MENU, MENU } from "../../constants/menu";
 
 const CustomWrapper = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const token = useSelector((state: RootState) => state.auth.token);
+
+  const [userData, setUserData] = useState<DecodedToken>();
 
   const menuHandler = (link: string) => {
     navigate(link);
@@ -29,6 +37,13 @@ const CustomWrapper = ({ children }: { children: React.ReactNode }) => {
   const logoutHandler = () => {
     dispatch(clearToken());
   };
+
+  useEffect(() => {
+    if (token) {
+      const decoded = jwtDecode<DecodedToken>(token);
+      setUserData(decoded);
+    }
+  }, [token]);
 
   return (
     <>
@@ -54,16 +69,27 @@ const CustomWrapper = ({ children }: { children: React.ReactNode }) => {
             }}
           >
             <List>
-              {MENU.map((m) => (
-                <ListItem key={m.key} disablePadding>
-                  <ListItemButton onClick={() => menuHandler(m.link)}>
-                    <ListItemIcon>
-                      <m.icon />
-                    </ListItemIcon>
-                    <ListItemText primary={m.title} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
+              {userData?.role === ROLE_ENUM.HR
+                ? HR_MENU.map((m) => (
+                    <ListItem key={m.key} disablePadding>
+                      <ListItemButton onClick={() => menuHandler(m.link)}>
+                        <ListItemIcon>
+                          <m.icon />
+                        </ListItemIcon>
+                        <ListItemText primary={m.title} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))
+                : MENU.map((m) => (
+                    <ListItem key={m.key} disablePadding>
+                      <ListItemButton onClick={() => menuHandler(m.link)}>
+                        <ListItemIcon>
+                          <m.icon />
+                        </ListItemIcon>
+                        <ListItemText primary={m.title} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
             </List>
             <Divider />
             <List sx={{ margin: "auto 0 .5rem" }}>

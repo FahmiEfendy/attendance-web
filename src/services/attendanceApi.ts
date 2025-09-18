@@ -9,6 +9,10 @@ import {
 
 export const attendanceApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getAllAttendance: builder.query<ApiAttendanceResponse, void>({
+      query: () => API.ATTENDANCE.ATTENDANCE,
+      providesTags: ["attendance"], // Tag for list
+    }),
     getMyAttendance: builder.query<ApiAttendanceResponse, void>({
       query: () => API.ATTENDANCE.ME,
       providesTags: ["myAttendance"], // Tag for list
@@ -40,6 +44,7 @@ export const attendanceApi = api.injectEndpoints({
 });
 
 export const {
+  useGetAllAttendanceQuery,
   useGetMyAttendanceQuery,
   useGetMyAttendanceTodayQuery,
   useSubmitAttendanceMutation,

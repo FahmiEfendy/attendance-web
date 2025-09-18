@@ -1,3 +1,5 @@
+import { UserDetail } from "./auth";
+
 export type BasicResponse = {
   message: string;
 };
@@ -10,6 +12,7 @@ export type UserAttendance = {
   time_out: string;
   photo_in_url: string;
   photo_out_url: string;
+  user: UserDetail;
 };
 
 export type ApiAttendanceResponse = {

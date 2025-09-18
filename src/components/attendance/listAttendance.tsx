@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import NotFound from "../notFound/notFound";
+import { ROLE_ENUM } from "../../constants/role";
 import CustomLoading from "../loading/customLoading";
 import { ApiAttendanceResponse, UserAttendance } from "../../types/attendance";
 
@@ -18,13 +19,19 @@ type ListAttendanceProps = {
   onOpen: (imagePath: string) => void;
   data: ApiAttendanceResponse;
   isLoading: boolean;
+  role?: string;
 };
 
-const ListAttendance = ({ onOpen, data, isLoading }: ListAttendanceProps) => {
+const ListAttendance = ({
+  onOpen,
+  data,
+  isLoading,
+  role,
+}: ListAttendanceProps) => {
   return (
     <TableContainer component={Paper}>
       <Typography variant="h5" sx={{ margin: "1rem" }}>
-        My Attendance
+        {role === ROLE_ENUM.HR ? "Employee Attendance" : "My Attendance"}
       </Typography>
       {isLoading ? (
         <CustomLoading />
@@ -32,6 +39,13 @@ const ListAttendance = ({ onOpen, data, isLoading }: ListAttendanceProps) => {
         <Table>
           <TableHead>
             <TableCell>Date</TableCell>
+            {role === ROLE_ENUM.HR && (
+              <>
+                <TableCell>Full Name</TableCell>
+                <TableCell>Department</TableCell>
+                <TableCell>Position</TableCell>
+              </>
+            )}
             <TableCell>Check In Date</TableCell>
             <TableCell>Check In Photo</TableCell>
             <TableCell>Check Out Date</TableCell>
@@ -43,6 +57,14 @@ const ListAttendance = ({ onOpen, data, isLoading }: ListAttendanceProps) => {
                 <TableCell>
                   {dayjs(row.date).format("dddd, DD MMMM YYYY")}
                 </TableCell>
+                {role === ROLE_ENUM.HR && (
+                  <>
+                    <TableCell>{row?.user.full_name}</TableCell>
+                    <TableCell>{row?.user.department}</TableCell>
+                    <TableCell>{row?.user.position}</TableCell>
+                  </>
+                )}
+
                 <TableCell>{row.time_in}</TableCell>
                 <TableCell onClick={() => onOpen(row.photo_in_url)}>
                   {row.photo_in_url ? (

@@ -5,6 +5,14 @@ export interface DecodedToken {
   role: string;
 }
 
+export interface UserDetail {
+  username: string;
+  role: string;
+  full_name: string;
+  department: string;
+  position: string;
+}
+
 export type ApiLoginRequest = {
   username: string;
   password: string;
