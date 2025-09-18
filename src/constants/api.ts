@@ -8,4 +8,10 @@ export const API = {
     ME: "/attendance/me",
     DETAIL: "/attendance/:id",
   },
+  USER: {
+    USER: "/user/",
+    DETAIL: "/user/:id",
+    UPDATE: "/user/:id",
+    DELETE: "/user/:id",
+  },
 };

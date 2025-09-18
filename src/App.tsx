@@ -5,6 +5,7 @@ import { PAGES } from "./constants/page";
 import HomePage from "./pages/home/home";
 import LoginPage from "./pages/login/login";
 import RegisterPage from "./pages/register/register";
+import ListEmployee from "./pages/employee/listEmployee";
 import AuthorizationWrapper from "./components/auth/authorizationWrapper";
 
 function App() {
@@ -18,6 +19,14 @@ function App() {
           element={
             <AuthorizationWrapper>
               <HomePage />
+            </AuthorizationWrapper>
+          }
+        />
+        <Route
+          path={PAGES.EMPLOYEE}
+          element={
+            <AuthorizationWrapper>
+              <ListEmployee />
             </AuthorizationWrapper>
           }
         />

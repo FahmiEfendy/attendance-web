@@ -3,15 +3,22 @@ import { Alert, AlertColor, Snackbar } from "@mui/material";
 
 type NotificationProps = {
   isOpen: boolean;
-  severity: AlertColor;
   message: string;
+  severity?: AlertColor;
+  reset?: any;
 };
 
-const Notification = ({ isOpen, severity, message }: NotificationProps) => {
+const Notification = ({
+  isOpen,
+  message,
+  severity = "success",
+  reset,
+}: NotificationProps) => {
   const [open, setOpen] = useState<boolean>(isOpen);
 
   const closeHandler = () => {
     setOpen(false);
+    reset();
   };
 
   useEffect(() => {

@@ -14,6 +14,10 @@ import NotFound from "../notFound/notFound";
 import { ROLE_ENUM } from "../../constants/role";
 import CustomLoading from "../loading/customLoading";
 import { ApiAttendanceResponse, UserAttendance } from "../../types/attendance";
+import {
+  DEPARTMENT_ENUM_LABEL,
+  POSITION_ENUM_LABEL,
+} from "../../constants/option";
 
 type ListAttendanceProps = {
   onOpen: (imagePath: string) => void;
@@ -35,7 +39,7 @@ const ListAttendance = ({
       </Typography>
       {isLoading ? (
         <CustomLoading />
-      ) : data?.userAttendance ? (
+      ) : data?.userAttendance.length > 0 ? (
         <Table>
           <TableHead>
             <TableCell>Date</TableCell>
@@ -60,8 +64,12 @@ const ListAttendance = ({
                 {role === ROLE_ENUM.HR && (
                   <>
                     <TableCell>{row?.user.full_name}</TableCell>
-                    <TableCell>{row?.user.department}</TableCell>
-                    <TableCell>{row?.user.position}</TableCell>
+                    <TableCell>
+                      {DEPARTMENT_ENUM_LABEL[row?.user.department]}
+                    </TableCell>
+                    <TableCell>
+                      {POSITION_ENUM_LABEL[row?.user.position]}
+                    </TableCell>
                   </>
                 )}
 

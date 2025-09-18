@@ -3,6 +3,14 @@ export const ROLE_ENUM = [
   { key: "employee", label: "Employee" },
 ];
 
+export const ROLE_ENUM_LABEL: Record<string, string> = ROLE_ENUM.reduce(
+  (acc, { key, label }) => {
+    acc[key] = label;
+    return acc;
+  },
+  {} as Record<string, string>
+);
+
 export const DEPARTMENT_ENUM = [
   { key: "hr", label: "Human Resources" },
   { key: "finance", label: "Finance" },
@@ -16,6 +24,12 @@ export const DEPARTMENT_ENUM = [
   { key: "administration", label: "Administration" },
 ];
 
+export const DEPARTMENT_ENUM_LABEL: Record<string, string> =
+  DEPARTMENT_ENUM.reduce((acc, { key, label }) => {
+    acc[key] = label;
+    return acc;
+  }, {} as Record<string, string>);
+
 export const POSITION_ENUM = [
   { key: "director", label: "Director" },
   { key: "manager", label: "Manager" },
@@ -28,3 +42,11 @@ export const POSITION_ENUM = [
   { key: "intern", label: "Intern" },
   { key: "consultant", label: "Consultant" },
 ];
+
+export const POSITION_ENUM_LABEL: Record<string, string> = POSITION_ENUM.reduce(
+  (acc, { key, label }) => {
+    acc[key] = label;
+    return acc;
+  },
+  {} as Record<string, string>
+);

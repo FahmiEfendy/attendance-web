@@ -7,6 +7,7 @@ type CustomTextFieldProps = {
   label: string;
   placeholder: string;
   type?: string;
+  disabled?: boolean;
 };
 
 const CustomTextField = ({
@@ -15,6 +16,7 @@ const CustomTextField = ({
   label,
   placeholder,
   type = "text",
+  disabled = false,
 }: CustomTextFieldProps) => {
   return (
     <Controller
@@ -29,6 +31,7 @@ const CustomTextField = ({
           placeholder={placeholder}
           type={type}
           fullWidth
+          disabled={disabled}
         />
       )}
     />
