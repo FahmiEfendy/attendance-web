@@ -51,12 +51,14 @@ const HomePage = () => {
       <CustomWrapper>
         {userData?.role === ROLE_ENUM.HR ? (
           attendanceList && (
-            <ListAttendance
-              onOpen={openImageHandler}
-              data={attendanceList}
-              isLoading={isLoadingAttendanceList}
-              role={userData?.role}
-            />
+            <Box sx={{ width: "100%" }}>
+              <ListAttendance
+                onOpen={openImageHandler}
+                data={attendanceList}
+                isLoading={isLoadingAttendanceList}
+                role={userData?.role}
+              />
+            </Box>
           )
         ) : (
           <Box sx={{ width: "100%" }}>

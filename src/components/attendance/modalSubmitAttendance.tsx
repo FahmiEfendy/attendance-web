@@ -44,7 +44,7 @@ const ModalSubmitAttendance = ({
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: "50rem",
+          width: { xs: "70%", md: "40%" },
           position: "absolute",
           top: "50%",
           left: "50%",
@@ -54,7 +54,9 @@ const ModalSubmitAttendance = ({
           gap: "1.5rem",
         }}
       >
-        <Typography variant="h5">Check In Attendance</Typography>
+        <Typography sx={{ fontSize: { xs: "1.25rem", md: "1.5rem" } }}>
+          Check In Attendance
+        </Typography>
         <CustomUploadImage name="photo" control={control} />
         <Box sx={{ display: "flex", marginLeft: "auto", gap: 2 }}>
           <Button variant="outlined" color="error" onClick={closeModalHandler}>

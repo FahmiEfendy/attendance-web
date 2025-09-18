@@ -80,7 +80,7 @@ const SubmitAttendance = ({ role }: SubmitAttendanceProps) => {
 
   return (
     <>
-      <Box sx={{ padding: "2rem" }}>
+      <Box sx={{ padding: { xs: "1rem", md: "2rem" } }}>
         {isLoadingMyAttendanceToday ? (
           <CustomLoading />
         ) : myAttendanceToday?.userAttendance ? (
@@ -89,8 +89,8 @@ const SubmitAttendance = ({ role }: SubmitAttendanceProps) => {
               variant="contained"
               onClick={openModalHandler}
               sx={{
-                height: "10rem",
-                width: "10rem",
+                height: { xs: "8rem", md: "10rem" },
+                width: { xs: "8rem", md: "10rem" },
                 borderRadius: "50rem",
                 border: `1rem solid ${
                   !myAttendanceToday?.userAttendance[0]?.time_in
@@ -117,7 +117,12 @@ const SubmitAttendance = ({ role }: SubmitAttendanceProps) => {
                 gap: 0.5,
               }}
             >
-              <Typography variant="h6" sx={{ marginBottom: ".5rem" }}>
+              <Typography
+                sx={{
+                  marginBottom: ".5rem",
+                  fontSize: { xs: "1rem", md: "1.25rem" },
+                }}
+              >
                 {today.format("dddd, DD MMMM YYYY")}
               </Typography>
               <Typography>

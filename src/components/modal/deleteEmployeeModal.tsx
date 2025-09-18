@@ -33,7 +33,7 @@ const DeleteEmployeeModal = ({
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "40rem",
+            width: { xs: "70%", md: "40%" },
             position: "absolute",
             top: "50%",
             left: "50%",

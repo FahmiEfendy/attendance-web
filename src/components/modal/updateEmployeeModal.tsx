@@ -80,7 +80,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "50rem",
+            width: { xs: "70%", md: "40%" },
             position: "absolute",
             top: "50%",
             left: "50%",
@@ -98,7 +98,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
             <CustomLoading />
           ) : (
             <Grid container spacing={2}>
-              <Grid size={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CustomTextField
                   control={control}
                   name="username"
@@ -107,7 +107,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   disabled
                 />
               </Grid>
-              <Grid size={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CustomTextField
                   control={control}
                   name="password"
@@ -117,7 +117,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   disabled
                 />
               </Grid>
-              <Grid size={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CustomTextField
                   control={control}
                   name="email"
@@ -126,7 +126,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   disabled
                 />
               </Grid>
-              <Grid size={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CustomTextField
                   control={control}
                   name="full_name"
@@ -134,7 +134,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   placeholder="Enter full name..."
                 />
               </Grid>
-              <Grid size={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CustomTextField
                   control={control}
                   name="phone"
@@ -143,7 +143,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   type="number"
                 />
               </Grid>
-              <Grid size={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CustomSelect
                   control={control}
                   name="role"
@@ -151,7 +151,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   options={ROLE_ENUM}
                 />
               </Grid>
-              <Grid size={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CustomSelect
                   control={control}
                   name="department"
@@ -159,7 +159,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   options={DEPARTMENT_ENUM}
                 />
               </Grid>
-              <Grid size={6}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <CustomSelect
                   control={control}
                   name="position"

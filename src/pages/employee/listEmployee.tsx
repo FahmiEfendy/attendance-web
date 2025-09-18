@@ -79,18 +79,23 @@ const ListEmployee = () => {
           <Typography variant="h5" sx={{ margin: "1rem" }}>
             Employee List
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer
+            component={Paper}
+            sx={{ width: "100%", overflowX: "auto" }}
+          >
             {isLoadingEmployeeList ? (
               <CustomLoading />
             ) : employeeList ? (
               <Table>
                 <TableHead>
-                  <TableCell>Full Name</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Phone</TableCell>
-                  <TableCell>Department</TableCell>
-                  <TableCell>Position</TableCell>
-                  <TableCell>Action</TableCell>
+                  <TableRow>
+                    <TableCell>Full Name</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>Phone</TableCell>
+                    <TableCell>Department</TableCell>
+                    <TableCell>Position</TableCell>
+                    <TableCell>Action</TableCell>
+                  </TableRow>
                 </TableHead>
                 <TableBody>
                   {employeeList?.allUsers.map((row: any) => (
