@@ -28,9 +28,11 @@ type AuthElementProps = {
 const AuthElement = ({ type }: AuthElementProps) => {
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm<
-    ApiLoginRequest | ApiRegisterRequest
-  >({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ApiLoginRequest | ApiRegisterRequest>({
     defaultValues:
       type === AuthType.LOGIN
         ? formLoginDefaultValue
@@ -160,6 +162,8 @@ const AuthElement = ({ type }: AuthElementProps) => {
                 name="username"
                 label="Username"
                 placeholder="Enter your username..."
+                isRequired
+                errors={errors}
               />
               <CustomTextField
                 control={control}
@@ -167,6 +171,8 @@ const AuthElement = ({ type }: AuthElementProps) => {
                 label="Password"
                 placeholder="Enter your passowrd..."
                 type="password"
+                isRequired
+                errors={errors}
               />
             </>
           )}
@@ -179,6 +185,8 @@ const AuthElement = ({ type }: AuthElementProps) => {
                   name="username"
                   label="Username"
                   placeholder="Enter your username..."
+                  isRequired
+                  errors={errors}
                 />
               </Grid>
               <Grid size={6}>
@@ -187,6 +195,8 @@ const AuthElement = ({ type }: AuthElementProps) => {
                   name="password"
                   label="Password"
                   placeholder="Enter your passowrd..."
+                  isRequired
+                  errors={errors}
                   type="password"
                 />
               </Grid>
@@ -196,6 +206,8 @@ const AuthElement = ({ type }: AuthElementProps) => {
                   name="email"
                   label="Email"
                   placeholder="Enter your email..."
+                  isRequired
+                  errors={errors}
                 />
               </Grid>
               <Grid size={6}>
@@ -204,6 +216,8 @@ const AuthElement = ({ type }: AuthElementProps) => {
                   name="full_name"
                   label="Full Name"
                   placeholder="Enter your full name..."
+                  isRequired
+                  errors={errors}
                 />
               </Grid>
               <Grid size={6}>
@@ -212,6 +226,8 @@ const AuthElement = ({ type }: AuthElementProps) => {
                   name="phone"
                   label="Phone"
                   placeholder="Enter your phone number..."
+                  isRequired
+                  errors={errors}
                   type="number"
                 />
               </Grid>
@@ -221,6 +237,7 @@ const AuthElement = ({ type }: AuthElementProps) => {
                   name="role"
                   label="Role"
                   options={ROLE_ENUM}
+                  isRequired
                 />
               </Grid>
               <Grid size={6}>
@@ -229,6 +246,7 @@ const AuthElement = ({ type }: AuthElementProps) => {
                   name="department"
                   label="Deparment"
                   options={DEPARTMENT_ENUM}
+                  isRequired
                 />
               </Grid>
               <Grid size={6}>
@@ -237,6 +255,7 @@ const AuthElement = ({ type }: AuthElementProps) => {
                   name="position"
                   label="Position"
                   options={POSITION_ENUM}
+                  isRequired
                 />
               </Grid>
             </Grid>

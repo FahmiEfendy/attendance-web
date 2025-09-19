@@ -8,6 +8,8 @@ type CustomTextFieldProps = {
   placeholder: string;
   type?: string;
   disabled?: boolean;
+  isRequired?: boolean;
+  errors?: any;
 };
 
 const CustomTextField = ({
@@ -17,11 +19,16 @@ const CustomTextField = ({
   placeholder,
   type = "text",
   disabled = false,
+  isRequired = false,
+  errors = {},
 }: CustomTextFieldProps) => {
   return (
     <Controller
       name={name}
       control={control}
+      rules={{
+        required: isRequired ? `${label} is required` : false,
+      }}
       render={({ field }) => (
         <TextField
           {...field}
@@ -32,6 +39,8 @@ const CustomTextField = ({
           type={type}
           fullWidth
           disabled={disabled}
+          error={!!errors[name]}
+          helperText={errors[name]?.message as string}
         />
       )}
     />

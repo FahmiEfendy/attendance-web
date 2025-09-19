@@ -4,7 +4,12 @@ import { API } from "../constants/api";
 export const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllEmployee: builder.query<any, any>({
-      query: () => API.USER.USER,
+      query: ({ role }) => {
+        const params = new URLSearchParams();
+        if (role) params.append("role", role);
+
+        return `${API.USER.USER}?${params.toString()}`;
+      },
       providesTags: ["user"],
     }),
     getEmployeeDetail: builder.query<any, any>({

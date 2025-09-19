@@ -22,7 +22,12 @@ type UpdateEmployeeProps = {
 };
 
 const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
-  const { control, handleSubmit, setValue } = useForm();
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   const { data: employeeDetail, isLoading: isLoadingEmployeeDetail } =
     useGetEmployeeDetailQuery(employeeId && { id: employeeId }, {
@@ -105,6 +110,8 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   label="Username"
                   placeholder="Enter username..."
                   disabled
+                  isRequired
+                  errors={errors}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -115,6 +122,8 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   placeholder="Enter passowrd..."
                   type="password"
                   disabled
+                  isRequired
+                  errors={errors}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -124,6 +133,8 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   label="Email"
                   placeholder="Enter email..."
                   disabled
+                  isRequired
+                  errors={errors}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -132,6 +143,8 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   name="full_name"
                   label="Full Name"
                   placeholder="Enter full name..."
+                  isRequired
+                  errors={errors}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -141,6 +154,8 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   label="Phone"
                   placeholder="Enter phone number..."
                   type="number"
+                  isRequired
+                  errors={errors}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -157,6 +172,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   name="department"
                   label="Deparment"
                   options={DEPARTMENT_ENUM}
+                  isRequired
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -165,6 +181,7 @@ const UpdateEmployeeModal = ({ employeeId, onClose }: UpdateEmployeeProps) => {
                   name="position"
                   label="Position"
                   options={POSITION_ENUM}
+                  isRequired
                 />
               </Grid>
             </Grid>

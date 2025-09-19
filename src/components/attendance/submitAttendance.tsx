@@ -166,6 +166,7 @@ const SubmitAttendance = ({ role }: SubmitAttendanceProps) => {
           checkInDate={myAttendanceToday?.userAttendance[0]?.time_in || null}
           checkOutDate={myAttendanceToday?.userAttendance[0]?.time_out || null}
           isLoading={isLoadingSubmitAttendance}
+          isSuccess={isSuccessSubmitAttendance}
         />
       )}
     </>

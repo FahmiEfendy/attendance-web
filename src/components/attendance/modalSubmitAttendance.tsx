@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Button, Modal, Paper, Typography } from "@mui/material";
 
@@ -12,6 +13,7 @@ type ModalSubmitAttendanceProps = {
   isLoading: boolean;
   closeModalHandler: () => void;
   userData: DecodedToken;
+  isSuccess: boolean;
 };
 
 const ModalSubmitAttendance = ({
@@ -22,8 +24,9 @@ const ModalSubmitAttendance = ({
   isLoading,
   closeModalHandler,
   userData,
+  isSuccess,
 }: ModalSubmitAttendanceProps) => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       checkInDate,
       checkOutDate,
@@ -37,6 +40,12 @@ const ModalSubmitAttendance = ({
 
     submitAttendance(formData);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      reset();
+    }
+  }, [isSuccess, reset]);
 
   return (
     <Modal open={isOpen} onClose={closeModalHandler}>
@@ -57,7 +66,7 @@ const ModalSubmitAttendance = ({
         <Typography sx={{ fontSize: { xs: "1.25rem", md: "1.5rem" } }}>
           Check In Attendance
         </Typography>
-        <CustomUploadImage name="photo" control={control} />
+        <CustomUploadImage name="photo" control={control} isRequired />
         <Box sx={{ display: "flex", marginLeft: "auto", gap: 2 }}>
           <Button variant="outlined" color="error" onClick={closeModalHandler}>
             Back

@@ -1,14 +1,25 @@
 import { useDropzone } from "react-dropzone";
 import { Controller } from "react-hook-form";
 import { useState, useCallback } from "react";
-import { Box, FormControl, FormLabel, Typography } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Typography,
+} from "@mui/material";
 
 type CustomUploadImageProps = {
   name: string;
   control: any;
+  isRequired: boolean;
 };
 
-const CustomUploadImage = ({ name, control }: CustomUploadImageProps) => {
+const CustomUploadImage = ({
+  name,
+  control,
+  isRequired = false,
+}: CustomUploadImageProps) => {
   const [preview, setPreview] = useState<string | null>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -27,7 +38,10 @@ const CustomUploadImage = ({ name, control }: CustomUploadImageProps) => {
     <Controller
       name={name}
       control={control}
-      render={({ field: { onChange } }) => (
+      rules={{
+        required: isRequired ? `Photo is required` : false,
+      }}
+      render={({ field: { onChange }, fieldState }) => (
         <>
           <FormControl fullWidth>
             <FormLabel>Photo</FormLabel>
@@ -56,6 +70,11 @@ const CustomUploadImage = ({ name, control }: CustomUploadImageProps) => {
                 Click here or drag & drop to upload an image
               </Typography>
             </Box>
+            {fieldState.error && (
+              <FormHelperText sx={{ color: "red", margin: ".5rem 0 0" }}>
+                {fieldState.error.message}
+              </FormHelperText>
+            )}
           </FormControl>
 
           {preview && (

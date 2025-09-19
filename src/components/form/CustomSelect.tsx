@@ -19,6 +19,8 @@ type CustomSelectProps = {
   label: string;
   options: Option[];
   fullWidth?: boolean;
+  isRequired?: boolean;
+  errors?: any;
 };
 
 export function CustomSelect({
@@ -27,11 +29,15 @@ export function CustomSelect({
   label,
   options,
   fullWidth = true,
+  isRequired = false,
 }: CustomSelectProps) {
   return (
     <Controller
       name={name}
       control={control}
+      rules={{
+        required: isRequired ? `${label} is required` : false,
+      }}
       render={({ field, fieldState }) => (
         <FormControl fullWidth={fullWidth} error={!!fieldState.error}>
           <InputLabel>{label}</InputLabel>
