@@ -42,16 +42,16 @@ Frontend web application for employee attendance and HR monitoring
 
 
 ## 📌 Tech Stack
-- **React** → Frontend framework  
-- **Material UI** → UI components & styling  
-- **Redux Toolkit** → State & API management  
-- **Day.js** → Date & time library  
-- **JWT-Decode** → Token decoder  
-- **React Dropzone** → File uploader  
-- **React Hook Form** → Form handler  
-- **React Router** → Routing & navigation  
-- **Redux Persist** → State persistence  
-- **TypeScript** → Typed language
+⚛️ **React** → Frontend framework  
+🎨 **Material UI** → UI components & styling  
+📦 **Redux Toolkit** → State & API management  
+⏰ **Day.js** → Date & time library  
+🔑 **JWT-Decode** → Token decoder  
+📤 **React Dropzone** → File uploader  
+📝 **React Hook Form** → Form handler  
+🧭 **React Router** → Routing & navigation  
+💾 **Redux Persist** → State persistence  
+🔷 **TypeScript** → Typed language
 
 
 ## ⚙️ Setup & Installation
@@ -68,7 +68,7 @@ npm run install
 ```bash
 REACT_APP_API_URL=http://localhost:5000
 ```
-5. Run development server
+4. Run development server
 ```bash
 npm run start
 ```
