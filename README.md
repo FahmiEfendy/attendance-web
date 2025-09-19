@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+## 🚀 Attendance Web
+Frontend web application for employee attendance and HR monitoring
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 🔑 Features
+<table>
+  <th colspan="2"><h3>Employee Feature</h3></th>
+  <tr>
+    <td>Employees can register and log in.</td>
+    <td><img src="https://github.com/user-attachments/assets/8b97087c-5dd2-44b2-83c8-66cf6d132b9a" alt="Employee Attendance Screenshot" /></td>
+  </tr>
+  <tr>
+    <td>Employees can check in and check out, with photo upload as WFH proof.</td>
+    <td><img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/3e5609d0-f23c-46ec-be48-b2b91ba1f276" /></td>
+  </tr>
+    <td>Employees can view their own attendance history.</td>
+    <td>
+      <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/d4e7c195-1440-4dbb-a027-677bbcb05c72" />
+    <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/b4901a89-b2fb-4c06-9c19-d8af9242a40c" />
+    </td>
+  </tr>
+</table>
 
-In the project directory, you can run:
+<table>
+    <th colspan="2"><h3>Human Resource Feature</h3></th>
+  <tr>
+    <td>HR can register and log in.</td>
+    <td><img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/1a61a11f-b20b-4271-a1c3-8bba1a77790f" /></td>
+  </tr>
+  <tr>
+    <td>HR can view employee attendance records.</td>
+    <td><img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/e20bf9e0-c588-42a3-9c73-79723e967e62" /></td>
+  </tr>
+  <tr>
+    <td>HR can access and manage (edit and delete) employee data.</td>
+    <td>
+      <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/8faddaf4-84fa-43e3-9ffa-b693462e4b22" />
+      <img width="auto" height="500" alt="image" src="https://github.com/user-attachments/assets/4bfa3b48-6e77-446d-855c-03a1767de3a2" />
+    </td>
+  </tr>
+</table>
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📌 Tech Stack
+- **React** → Frontend framework  
+- **Material UI** → UI components & styling  
+- **Redux Toolkit** → State & API management  
+- **Day.js** → Date & time library  
+- **JWT-Decode** → Token decoder  
+- **React Dropzone** → File uploader  
+- **React Hook Form** → Form handler  
+- **React Router** → Routing & navigation  
+- **Redux Persist** → State persistence  
+- **TypeScript** → Typed language
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ⚙️ Setup & Installation
+1. Clone this repo
+```bash
+git clone https://github.com/FahmiEfendy/attendance-web.git
+cd attendance-web
+```
+2. Install dependencies
+```bash
+npm run install
+```
+3. Copy .env value
+```bash
+REACT_APP_API_URL=http://localhost:5000
+```
+5. Run development server
+```bash
+npm run start
+```
